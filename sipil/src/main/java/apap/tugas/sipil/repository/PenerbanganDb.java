@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-public interface PilotDb extends JpaRepository<PilotModel, String> {
-    List<PilotModel> findAll();
-    Optional<PilotModel> findByNip(String nip);
+public interface PenerbanganDb extends JpaRepository<PenerbanganModel, Long> {
+    Optional<PenerbanganModel> findById(Long id);
+    List<PenerbanganModel> findAll();
 }

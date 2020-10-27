@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>View All Pilot</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <a th:href="@{pilot/tambah}" class="btn btn-sm btn-light tombol-tambah-atas text-light" style="background: #577782" role="button"> +Tambah Pilot </a>
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <h2  class="text-light text-table">Daftar Pilot</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">NIP</th>
+                <th scope="col">NIK</th>
+                <th scope="col">Tanggal Lahir</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Action</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pilot, iterationStatus: ${listPilot}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${pilot.nama}"></td>
+                <td th:text="${pilot.nip}"></td>
+                <td th:text="${pilot.nik}"></td>
+                <td th:text="${pilot.tanggalLahir}"></td>
+                <td th:text="${pilot.jenisKelamin}"></td>
+                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>
+                <td><a href="#" class="btn btn-sm btn-light text-light tombol-ubah" role="button"> Ubah </a></td>
+                <td><a href="#" class="btn btn-sm btn-light text-light tombol-hapus" role="button"> Hapus </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

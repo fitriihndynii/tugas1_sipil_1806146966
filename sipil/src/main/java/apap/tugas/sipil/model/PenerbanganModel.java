@@ -1,6 +1,7 @@
 package apap.tugas.sipil.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.Set;
 public class PenerbanganModel implements Serializable{
     @Id
     @NotNull
-    @Size(max = 20)
+    @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

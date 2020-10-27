@@ -3,7 +3,10 @@ package apap.tugas.sipil.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -15,7 +18,7 @@ import java.util.Set;
 public class PilotModel implements Serializable{
     @Id
     @NotNull
-    @Size(max=20)
+    @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,6 +39,7 @@ public class PilotModel implements Serializable{
 
     @NotNull
     @Column(name="tanggalLahir", nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate tanggalLahir;
 
     @NotNull

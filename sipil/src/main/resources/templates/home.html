@@ -9,35 +9,16 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<!--<div class="container align-items-center align-self-center">-->
-<!--    <div class="card text-center align-items-center" style="background: #001B36">-->
-<!--        <div class="card-body">-->
-<!--            <h2 class="text-light">Selamat Datang di SIPILOT! </h2>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="card text-center align-items-center">-->
-<!--        <div class="card-body">-->
-<!--            <h2 class="text-dark">Daftar Fitur: </h2>-->
-<!--            <a href="#" class="btn text-light" style="background: #001B36"> Pilot </a>-->
-<!--            <a href="#" class="btn text-light" style="background: #001B36"> Penerbangan </a>-->
-<!--            <a href="#" class="btn text-light" style="background: #001B36"> Cari </a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 <div class="container align-self-center align-items-center">
     <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="square" style="background: #001B36">
-                <h2 class="text-light">Selamat Datang di SIPILOT! </h2>
-            </div>
+        <div class="jumbotron col-md-12 col-sm-12" style="background: #001B36">
+            <h2 class="text-light text-center">Selamat Datang di SIPILOT! </h2>
         </div>
-        <div class="col-md-12 col-sm-12">
-            <div class="square">
-                <h4 class="text-dark">Daftar Fitur: </h4>
-                <a href="#" class="btn text-light" style="background: #001B36"> Pilot </a>
-                <a href="#" class="btn text-light" style="background: #001B36"> Penerbangan </a>
-                <a href="#" class="btn text-light" style="background: #001B36"> Cari </a>
-            </div>
+        <div class="jumbotron col-md-12 col-sm-12 justify-content-md-center text-center" style="background: white">
+            <h4 class="text-dark">Daftar Fitur: </h4>
+            <a th:href="@{/pilot}" class="btn btn-home text-light" style="background: #001B36"> Pilot </a>
+            <a href="#" class="btn btn-home text-light" style="background: #001B36"> Penerbangan </a>
+            <a href="#" class="btn btn-home text-light" style="background: #001B36"> Cari </a>
         </div>
     </div>
 </div>

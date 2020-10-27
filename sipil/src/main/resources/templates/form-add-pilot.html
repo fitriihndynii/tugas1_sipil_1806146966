@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Add Pilot</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <h3 class="text-table text-light">Tambah Pilot</h3>
+    <form th:action="@{/pilot/tambah}" th:object="${pilot}" method="POST">
+        <div class="form-group">
+            <label>Nama</label>
+            <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+        </div>
+        <div class="form-group">
+            <label>NIK</label>
+            <input type="number" name="nik" class="form-control" placeholder="NIK">
+        </div>
+        <div class="form-group">
+            <label>Tempat Lahir</label>
+            <input type="text" name="tempatLahir" class="form-control" placeholder="contoh: Jakarta">
+        </div>
+        <div class="form-group">
+            <label>Tanggal Lahir</label>
+            <input th:text="${#temporals.format(localDate, 'dd/MM/yyyy')}" name="tanggalLahir" class="form-control" placeholder="DD/MM/YYYY">
+        </div>
+        <div class="form-group">
+            <label>Jenis Kelamin</label>
+            <select name="jenisKelamin" class="form-control">
+                <option value="1">Laki-Laki</option>
+                <option value="2" selected>Perempuan</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Sekolah</label>
+            <select name="akademi" class="form-control" th:field="${akademi}">
+                <option value="0">Pilih Sekolah</option>
+                <option th:each="akademi:${akademi}" th:value="${akademi.id}" th:text="${akademi.nama}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Maskapai</label>
+            <select name="maskapai" class="form-control" th:field="${maskapai}">
+                <option value="0">Pilih Maskapai</option>
+                <option th:each="maskapai:${maskapai}" th:value="${maskapai.id}" th:text="${maskapai.nama}"></option>
+            </select>
+        </div>
+        <div>
+            <a th:href="@{/pilot}" class="btn btn-sm tombol-batal" role="button">Batal</a>
+            <button type="submit" class="btn btn-primary tombol-tambah-bawah">Tambah</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

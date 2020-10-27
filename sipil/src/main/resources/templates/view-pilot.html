@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>View Pilot</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <h2 class="text-light text-table">Detail Pilot</h2>
+        <table
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <h2  class="text-light text-table">Jadwal Bertugas</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Kode Penerbangan</th>
+                <th scope="col">Waktu</th>
+                <th scope="col">Kota Asal</th>
+                <th scope="col">Kota Tujuan</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${penerbangan.kode}"></td>
+                <td th:text="${penerbangan.waktu}"></td>
+                <td th:text="${penerbangan.kotaAsal}"></td>
+                <td th:text="${penerbangan.kotaTujuan}"></td>
+                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
