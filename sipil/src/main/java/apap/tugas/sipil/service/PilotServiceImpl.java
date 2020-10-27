@@ -16,10 +16,9 @@ public class PilotServiceImpl implements PilotService{
     @Autowired
     PilotDb pilotDb;
 
-    PilotPenerbanganDb pilotPenerbanganDb;
-
     @Override
     public void addPilot(PilotModel pilot){
+        generateNip(pilot);
         pilotDb.save(pilot);
     }
 
@@ -27,8 +26,7 @@ public class PilotServiceImpl implements PilotService{
     public void generateNip(PilotModel pilot){
         String gender = pilot.getJenisKelamin().toString();
         String awalTempatLahir = pilot.getTempatLahir().substring(0,2);
-        String akhirNama = String.valueOf(pilot.getNamaPilot().charAt(pilot.getNamaPilot().length()-1));
-        System.out.println("akhirnama= " + akhirNama);
+        String akhirNama = String.valueOf(pilot.getNama().charAt(pilot.getNama().length()-1));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMM");
         String ddmm = pilot.getTanggalLahir().format(formatter);
         String tahun = Integer.toString((int)(Math.floor(pilot.getTanggalLahir().getYear()/10)));

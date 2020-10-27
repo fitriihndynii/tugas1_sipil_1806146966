@@ -33,7 +33,7 @@ public class PilotController {
     @GetMapping("/pilot")
     public String listPilot(Model model){
         List<PilotModel> listPilot = pilotService.getPilotList();
-        model.addAttribute( "listHotel", listPilot);
+        model.addAttribute( "listPilot", listPilot);
         return "viewall-pilot";
     }
 
@@ -49,23 +49,15 @@ public class PilotController {
     public String addPilotSubmit(
             @ModelAttribute PilotModel pilot,
             Model model){
-        System.out.println("nama " + pilot.getNamaPilot());
-        System.out.println("nik " + pilot.getNik());
-        System.out.println("nip " + pilot.getNip());
-        System.out.println("gender " + pilot.getJenisKelamin());
-        System.out.println("tanggalLahir " + pilot.getTanggalLahir());
-        System.out.println("tempat " + pilot.getTempatLahir());
-        System.out.println("sekolah " + pilot.getAkademi());
-        System.out.println("maskapai " + pilot.getMaskapai());
-        pilotService.generateNip(pilot);
         pilotService.addPilot(pilot);
         model.addAttribute("nip", pilot.getNip());
         return "add-pilot";
     }
 
-    @GetMapping("/pilot/{nipPilot}")
+    @RequestMapping("/pilot/{nipPilot}")
     public String viewDetailPilot(
-            @RequestParam(value = "nip") String nip,
+//            @RequestParam(value = "nip") String nip,
+            @PathVariable String nip,
             Model model
     ){
         PilotModel pilot = pilotService.getPilotByNipPilot(nip);

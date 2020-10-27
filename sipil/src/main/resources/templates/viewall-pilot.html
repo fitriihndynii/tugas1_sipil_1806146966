@@ -36,9 +36,9 @@
                 <td th:text="${pilot.nik}"></td>
                 <td th:text="${pilot.tanggalLahir}"></td>
                 <td th:text="${pilot.jenisKelamin}"></td>
-                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>
-                <td><a href="#" class="btn btn-sm btn-light text-light tombol-ubah" role="button"> Ubah </a></td>
-                <td><a href="#" class="btn btn-sm btn-light text-light tombol-hapus" role="button"> Hapus </a></td>
+                <td><a th:href="@{/pilot/}+${pilot.nip}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
+                <td><a href="#" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
+                <td><a href="#" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>
             </tr>
             </tbody>
         </table>

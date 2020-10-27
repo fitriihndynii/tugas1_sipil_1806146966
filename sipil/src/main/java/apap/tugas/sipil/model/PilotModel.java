@@ -17,7 +17,6 @@ import java.util.Set;
 @Table(name="pilot")
 public class PilotModel implements Serializable{
     @Id
-    @NotNull
     @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -65,6 +64,14 @@ public class PilotModel implements Serializable{
 
     @OneToMany(mappedBy = "pilot")
     private Set<PilotPenerbanganModel> listPilotPenerbangan;
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
 
     public Set<PilotPenerbanganModel> getListPilotPenerbangan() {
         return listPilotPenerbangan;
@@ -128,14 +135,6 @@ public class PilotModel implements Serializable{
 
     public void setNip(String nip) {
         this.nip = nip;
-    }
-
-    public String getNamaPilot() {
-        return nama;
-    }
-
-    public void setNamaPilot(String nama) {
-        this.nama = nama;
     }
 
     public Long getId() {

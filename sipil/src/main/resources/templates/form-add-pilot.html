@@ -36,16 +36,16 @@
         </div>
         <div class="form-group">
             <label>Sekolah</label>
-            <select name="akademi" class="form-control" th:field="${akademi}">
+            <select name="akademi" class="form-control" th:field="*{akademi}">
                 <option value="0">Pilih Sekolah</option>
-                <option th:each="akademi:${akademi}" th:value="${akademi.id}" th:text="${akademi.nama}"></option>
+                <option th:each="akademiObject:${akademi}" th:value="${akademiObject.id}" th:text="${akademiObject.nama}"></option>
             </select>
         </div>
         <div class="form-group">
             <label>Maskapai</label>
-            <select name="maskapai" class="form-control" th:field="${maskapai}">
+            <select name="maskapai" class="form-control" th:field="*{maskapai}">
                 <option value="0">Pilih Maskapai</option>
-                <option th:each="maskapai:${maskapai}" th:value="${maskapai.id}" th:text="${maskapai.nama}"></option>
+                <option th:each="maskapaiObject:${maskapai}" th:value="${maskapaiObject.id}" th:text="${maskapaiObject.nama}"></option>
             </select>
         </div>
         <div>

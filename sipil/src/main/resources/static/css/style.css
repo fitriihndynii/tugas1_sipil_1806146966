@@ -14,6 +14,7 @@ body > div{
 
 .tombol-tambah-atas{
     justify-content: left;
+    padding: 0px 0px 50px;
     !important; background: #577782;
 }
 
@@ -23,20 +24,21 @@ body > div{
 }
 
 .text-table{
+    padding: 10px;
     background: #001B36;
     text-align: center;
 }
 
 .tombol-lihat{
-    background: #1b4a88
+    !important; background: #1b4a88
 }
 
 .tombol-ubah{
-    background: #061c32
+    !important; background: #061c32
 }
 
 .tombol-hapus{
-    background: #2f0800
+    !important; background: #2f0800
 }
 
 .tombol-batal{

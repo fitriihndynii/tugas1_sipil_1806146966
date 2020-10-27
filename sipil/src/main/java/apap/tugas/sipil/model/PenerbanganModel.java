@@ -12,7 +12,6 @@ import java.util.Set;
 @Table(name="penerbangan")
 public class PenerbanganModel implements Serializable{
     @Id
-    @NotNull
     @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
