@@ -16,6 +16,8 @@ public class PilotServiceImpl implements PilotService{
     @Autowired
     PilotDb pilotDb;
 
+    private PilotModel oldPilot;
+
     @Override
     public void addPilot(PilotModel pilot){
         generateNip(pilot);
@@ -45,5 +47,34 @@ public class PilotServiceImpl implements PilotService{
     @Override
     public PilotModel getPilotByNipPilot(String nip){
         return pilotDb.findByNip(nip).get();
+    }
+
+    @Override
+    public PilotModel updatePilot(PilotModel pilot){
+        PilotModel targetPilot = pilotDb.findByNip(pilot.getNip()).get();
+
+        try{
+            targetPilot.setNama(pilot.getNama());
+            targetPilot.setNik(pilot.getNik());
+            targetPilot.setTempatLahir(pilot.getTempatLahir());
+            targetPilot.setTanggalLahir(pilot.getTanggalLahir());
+            targetPilot.setJenisKelamin(pilot.getJenisKelamin());
+            targetPilot.setAkademi(pilot.getAkademi());
+            targetPilot.setMaskapai(pilot.getMaskapai());
+            if(targetPilot.getNama() == oldPilot.getNama() || targetPilot.getTempatLahir() == oldPilot.getTempatLahir() || targetPilot.getTanggalLahir() == oldPilot.getTanggalLahir() || targetPilot.getJenisKelamin() == oldPilot.getJenisKelamin()){
+                pilotDb.save(targetPilot);
+            }else{
+                generateNip(targetPilot);
+                pilotDb.save(targetPilot);
+            }
+            return targetPilot;
+        } catch (NullPointerException nullException){
+            return null;
+        }
+    }
+
+    @Override
+    public void oldPilot(PilotModel pilot){
+        this.oldPilot = pilot;
     }
 }

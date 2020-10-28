@@ -54,28 +54,52 @@ public class PilotController {
         return "add-pilot";
     }
 
-    @RequestMapping("/pilot/{nipPilot}")
+    @GetMapping("/pilot/view")
     public String viewDetailPilot(
-//            @RequestParam(value = "nip") String nip,
-            @PathVariable String nip,
+            @RequestParam(value = "nipPilot") String nipPilot,
             Model model
     ){
-        PilotModel pilot = pilotService.getPilotByNipPilot(nip);
-        List<PenerbanganModel> listPenerbangan = pilotPenerbanganService.getListPenerbangan(pilot.getId());
+        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
+//        List<PenerbanganModel> listPenerbangan = pilotPenerbanganService.getListPenerbangan(pilot.getId());
+//        System.out.println("List Penerbangan " + listPenerbangan);
         model.addAttribute("pilot", pilot);
-        model.addAttribute("listPenerbangan", listPenerbangan);
+//        model.addAttribute("listPenerbangan", listPenerbangan);
         return "view-pilot";
     }
 
-//    @RequestMapping("/pilot/{nipPilot}")
-//    public String viewDetailPilotWithPath(
-//            @PathVariable String nip,
-//            Model model
-//    ){
-//        PilotModel pilot = pilotService.getPilotByNipPilot(nip);
+    @RequestMapping("/pilot/view/{nipPilot}")
+    public String viewDetailPilotWithPath(
+            @PathVariable String nipPilot,
+            Model model
+    ){
+        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
 //        List<PenerbanganModel> listPenerbangan = pilotPenerbanganService.getListPenerbangan(pilot.getId());
-//        model.addAttribute("pilot", pilot);
+        model.addAttribute("pilot", pilot);
 //        model.addAttribute("listPenerbangan", listPenerbangan);
-//        return "view-pilot";
-//    }
+        return "view-pilot";
+    }
+
+    @GetMapping("/pilot/ubah/{nipPilot}")
+    public String changePilotFormPage(
+            @PathVariable String nipPilot,
+            Model model
+    ){
+        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
+        pilotService.oldPilot(pilot);
+        model.addAttribute("pilot", pilot);
+        model.addAttribute("akademi", akademiService.getListAkademi());
+        model.addAttribute("maskapai", maskapaiService.getListMaskapai());
+        model.addAttribute("akademiPilot");
+        return "form-update-pilot";
+    }
+
+    @PostMapping("/pilot/ubah")
+    public String changePilotFormSubmit(
+            @ModelAttribute PilotModel pilot,
+            Model model
+    ){
+        PilotModel pilotUpdated = pilotService.updatePilot(pilot);
+        model.addAttribute("pilot", pilotUpdated);
+        return "update-pilot";
+    }
 }

@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PilotPenerbanganDb extends JpaRepository<PilotPenerbanganModel, Long> {
-    List<PilotModel> findAllByPenerbangan(Long penerbanganId);
-    List<PenerbanganModel> findAllByPilot(Long pilotId);
+//    List<PilotModel> findAllByIdPenerbangan(Long penerbanganId);
+//    List<PenerbanganModel> findAllByIdPilot(Long pilotId);
 }

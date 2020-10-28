@@ -11,7 +11,18 @@
 <div class="container">
     <div class="col-md-12 col-sm-12">
         <h2 class="text-light text-table">Detail Pilot</h2>
-        <table
+        <h4 th:text=" 'Id                   : ' + ${pilot.id}"></h4>
+        <h4 th:text=" 'Nama                 : ' + ${pilot.nama}"></h4>
+        <h4 th:text=" 'NIK                  : ' + ${pilot.nik}"></h4>
+        <h4>
+            <div th:if="${pilot.jenisKelamin} == 1">Jenis Kelamin        : Laki-laki</div>
+            <div th:if="${pilot.jenisKelamin} == 2">Jenis Kelamin        : Perempuan</div>
+        </h4>
+        <h4 th:text=" 'NIP                  : ' + ${pilot.nip}"></h4>
+        <h4 th:text=" 'Tempat Lahir         : ' + ${pilot.tempatLahir}"></h4>
+        <h4 th:text=" 'Tanggal Lahir        : ' + ${#temporals.format(pilot.tanggalLahir, 'dd/MM/yyyy')}"></h4>
+        <h4 th:text=" 'Sekolah              : ' + ${pilot.akademi.nama}"></h4>
+        <h4 th:text=" 'Maskapai             : ' + ${pilot.maskapai.nama}"></h4>
     </div>
     <div class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Jadwal Bertugas</h2>
@@ -27,14 +38,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">
-                <td th:text="${iterationStatus.count}"></td>
-                <td th:text="${penerbangan.kode}"></td>
-                <td th:text="${penerbangan.waktu}"></td>
-                <td th:text="${penerbangan.kotaAsal}"></td>
-                <td th:text="${penerbangan.kotaTujuan}"></td>
-                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>
-            </tr>
+<!--            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">-->
+<!--                <td th:text="${iterationStatus.count}"></td>-->
+<!--                <td th:text="${penerbangan.kode}"></td>-->
+<!--                <td th:text="${penerbangan.waktu}"></td>-->
+<!--                <td th:text="${penerbangan.kotaAsal}"></td>-->
+<!--                <td th:text="${penerbangan.kotaTujuan}"></td>-->
+<!--                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>-->
+<!--            </tr>-->
             </tbody>
         </table>
     </div>
