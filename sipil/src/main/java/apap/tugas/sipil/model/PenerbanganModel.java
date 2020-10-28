@@ -1,5 +1,7 @@
 package apap.tugas.sipil.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -33,6 +35,7 @@ public class PenerbanganModel implements Serializable{
 
     @NotNull
     @Column(name="waktu", nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm a")
     private LocalDateTime waktu;
 
     @OneToMany(mappedBy = "penerbangan")

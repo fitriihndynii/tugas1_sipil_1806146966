@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Add Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <h2 class="text-center" th:text=" 'Penerbangan dengan kode ' + ${kode} + ' berhasil ditambahkan'"></h2>
+    <a th:href="@{/penerbangan}">Kembali ke Daftar Penerbangan</a>
+</div>
+</body>
+</html>

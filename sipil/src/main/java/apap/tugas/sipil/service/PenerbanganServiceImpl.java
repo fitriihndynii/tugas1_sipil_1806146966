@@ -17,6 +17,16 @@ public class PenerbanganServiceImpl implements PenerbanganService{
     PenerbanganDb penerbanganDb;
 
     @Override
+    public void addPenerbangan(PenerbanganModel penerbangan){
+        penerbanganDb.save(penerbangan);
+    }
+
+    @Override
+    public List<PenerbanganModel> getPenerbanganList(){
+        return penerbanganDb.findAll();
+    }
+
+    @Override
     public PenerbanganModel getPenerbanganById(Long id){
         return penerbanganDb.findById(id).get();
     }
