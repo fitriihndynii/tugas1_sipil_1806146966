@@ -39,9 +39,9 @@
                     <div th:if="${pilot.jenisKelamin == 1}">Laki-laki</div>
                     <div th:if="${pilot.jenisKelamin == 2}">Perempuan</div>
                 </td>
-                <td><a th:href="@{/pilot/view/}+${pilot.nip}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
+                <td><a th:href="@{/pilot/}+${pilot.nip}" methods="GET" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
                 <td><a th:href="@{/pilot/ubah/}+${pilot.nip}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
-                <td><a href="#" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>
+                <td><a th:href="@{/pilot/hapus/}+${pilot.nip}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>
             </tr>
             </tbody>
         </table>

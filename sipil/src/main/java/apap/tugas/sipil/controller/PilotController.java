@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PilotController {
@@ -54,28 +55,14 @@ public class PilotController {
         return "add-pilot";
     }
 
-    @GetMapping("/pilot/view")
+    @GetMapping("/pilot/{nipPilot}")
     public String viewDetailPilot(
-            @RequestParam(value = "nipPilot") String nipPilot,
-            Model model
-    ){
-        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
-//        List<PenerbanganModel> listPenerbangan = pilotPenerbanganService.getListPenerbangan(pilot.getId());
-//        System.out.println("List Penerbangan " + listPenerbangan);
-        model.addAttribute("pilot", pilot);
-//        model.addAttribute("listPenerbangan", listPenerbangan);
-        return "view-pilot";
-    }
-
-    @RequestMapping("/pilot/view/{nipPilot}")
-    public String viewDetailPilotWithPath(
             @PathVariable String nipPilot,
             Model model
     ){
         PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
-//        List<PenerbanganModel> listPenerbangan = pilotPenerbanganService.getListPenerbangan(pilot.getId());
         model.addAttribute("pilot", pilot);
-//        model.addAttribute("listPenerbangan", listPenerbangan);
+        model.addAttribute("listPilPen", pilot.getListPilotPenerbangan());
         return "view-pilot";
     }
 
@@ -89,7 +76,6 @@ public class PilotController {
         model.addAttribute("pilot", pilot);
         model.addAttribute("akademi", akademiService.getListAkademi());
         model.addAttribute("maskapai", maskapaiService.getListMaskapai());
-        model.addAttribute("akademiPilot");
         return "form-update-pilot";
     }
 
@@ -101,5 +87,21 @@ public class PilotController {
         PilotModel pilotUpdated = pilotService.updatePilot(pilot);
         model.addAttribute("pilot", pilotUpdated);
         return "update-pilot";
+    }
+
+    @RequestMapping("/pilot/hapus/{nipPilot}")
+    public String deletePilot(
+            @PathVariable String nipPilot,
+            Model model
+    ){
+        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
+        Set<PilotPenerbanganModel> listPilotPenerbangan = pilot.getListPilotPenerbangan();
+        model.addAttribute("pilot", pilot);
+        if(listPilotPenerbangan.size() == 0){
+            pilotService.deletePilot(pilot);
+            return "delete-pilot";
+        }else{
+            return "error-delete-pilot";
+        }
     }
 }

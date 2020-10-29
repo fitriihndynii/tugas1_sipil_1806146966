@@ -13,13 +13,8 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
     @Autowired
     PilotPenerbanganDb pilotPenerbanganDb;
 
-//    @Override
-//    public List<PilotModel> getListPilot(Long penerbanganId){
-//        return pilotPenerbanganDb.findAllByIdPenerbangan(penerbanganId);
-//    }
-
-//    @Override
-//    public List<PenerbanganModel> getListPenerbangan(Long pilotId){
-//        return pilotPenerbanganDb.findAllByIdPilot(pilotId);
-//    }
+    @Override
+    public List<PilotPenerbanganModel> getListPilPenByPenerbangan(PenerbanganModel penerbangan){
+        return pilotPenerbanganDb.findAllByPenerbangan(penerbangan);
+    }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Ubah Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <h3 class="text-table text-light">Ubah Penerbangan</h3>
+    <form th:action="@{/penerbangan/ubah}" th:object="${penerbangan}" method="POST">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label>Kode</label>
+            <input type="text" name="kode" class="form-control" th:value="*{kode}" required>
+        </div>
+        <div class="form-group">
+            <label>Waktu</label>
+            <input th:text="${#temporals.format(localDateTime, 'dd/MM/yyyy hh:mm a')}" name="waktu" class="form-control" th:value="*{#temporals.format(waktu, 'dd/MM/yyyy hh:mm a')}">
+        </div>
+        <div class="form-group">
+            <label>Kota Asal</label>
+            <input type="text" name="kotaAsal" class="form-control" th:value="*{kotaAsal}">
+        </div>
+        <div class="form-group">
+            <label>Kota Tujuan</label>
+            <input type="text" name="kotaTujuan" class="form-control" th:value="*{kotaTujuan}">
+        </div>
+        <div>
+            <a th:href="@{/penerbangan}" class="btn btn-sm tombol-batal" role="button">Batal</a>
+            <button type="submit" class="btn btn-primary tombol-tambah-bawah">Simpan</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

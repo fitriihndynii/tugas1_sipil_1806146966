@@ -34,8 +34,8 @@
                 <td th:text="${#temporals.format(penerbangan.waktu, 'dd/MM/yyyy hh:mm a')}"></td>
                 <td th:text="${penerbangan.kotaAsal}"></td>
                 <td th:text="${penerbangan.kotaTujuan}"></td>
-                <td><a th:href="@{/penerbangan}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
-                <td><a th:href="@{/penerbangan}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
+                <td><a th:href="@{/penerbangan/detail/}+${penerbangan.id}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
+                <td><a th:href="@{/penerbangan/ubah/}+${penerbangan.id}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
                 <td><a href="#" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>
             </tr>
             </tbody>

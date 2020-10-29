@@ -77,4 +77,9 @@ public class PilotServiceImpl implements PilotService{
     public void oldPilot(PilotModel pilot){
         this.oldPilot = pilot;
     }
+
+    @Override
+    public void deletePilot(PilotModel pilot){
+        pilotDb.delete(pilot);
+    }
 }

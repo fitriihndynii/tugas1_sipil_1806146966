@@ -23,6 +23,8 @@
         <h4 th:text=" 'Tanggal Lahir        : ' + ${#temporals.format(pilot.tanggalLahir, 'dd/MM/yyyy')}"></h4>
         <h4 th:text=" 'Sekolah              : ' + ${pilot.akademi.nama}"></h4>
         <h4 th:text=" 'Maskapai             : ' + ${pilot.maskapai.nama}"></h4>
+        <a th:href="@{/pilot/ubah/}+${pilot.nip}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a>
+        <a th:href="@{/pilot/hapus/}+${pilot.nip}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a>
     </div>
     <div class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Jadwal Bertugas</h2>
@@ -38,14 +40,14 @@
             </tr>
             </thead>
             <tbody>
-<!--            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">-->
-<!--                <td th:text="${iterationStatus.count}"></td>-->
-<!--                <td th:text="${penerbangan.kode}"></td>-->
-<!--                <td th:text="${penerbangan.waktu}"></td>-->
-<!--                <td th:text="${penerbangan.kotaAsal}"></td>-->
-<!--                <td th:text="${penerbangan.kotaTujuan}"></td>-->
-<!--                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>-->
-<!--            </tr>-->
+            <tr th:each="pilpen, iterationStatus: ${listPilPen}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${pilpen.penerbangan.kode}"></td>
+                <td th:text="${#temporals.format(pilpen.penerbangan.waktu, 'HH:mm, dd/MM/yy')}"></td>
+                <td th:text="${pilpen.penerbangan.kotaAsal}"></td>
+                <td th:text="${pilpen.penerbangan.kotaTujuan}"></td>
+                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -8,12 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PenerbanganController {
     @Qualifier("penerbanganServiceImpl")
     @Autowired
     PenerbanganService penerbanganService;
+
+    @Autowired
+    PilotPenerbanganService pilotPenerbanganService;
 
     @GetMapping("/penerbangan")
     public String listPenerbangan(Model model){
@@ -36,4 +40,51 @@ public class PenerbanganController {
         model.addAttribute("kode", penerbangan.getKode());
         return "add-penerbangan";
     }
+
+    @GetMapping("/penerbangan/ubah/{idPenerbangan}")
+    public String changePenerbanganFormPage(
+            @PathVariable Long idPenerbangan,
+            Model model
+    ){
+        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+        model.addAttribute("penerbangan", penerbangan);
+        return "form-update-penerbangan";
+    }
+
+    @PostMapping("/penerbangan/ubah")
+    public String changePenerbanganFormSubmit(
+            @ModelAttribute PenerbanganModel penerbangan,
+            Model model
+    ){
+        PenerbanganModel penerbanganUpdated = penerbanganService.updatePenerbangan(penerbangan);
+        model.addAttribute("penerbangan", penerbanganUpdated);
+        return "update-penerbangan";
+    }
+
+    @GetMapping("/penerbangan/detail/{idPenerbangan}")
+    public String viewDetailPenerbangan(
+            @PathVariable Long idPenerbangan,
+            Model model
+    ){
+        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+//        List<PilotPenerbanganModel> listPilotPenerbangan = pilotPenerbanganService.getListPilPenByPenerbangan(penerbangan);
+        model.addAttribute("penerbangan", penerbangan);
+        model.addAttribute("listPilPen", penerbangan.getListPilotPenerbangan());
+//        model.addAttribute("listPilpen", listPilotPenerbangan);
+        return "view-penerbangan";
+    }
+//    @PostMapping("/penerbangan/hapus")
+//    public String deletePenerbangan(
+//            @ModelAttribute PenerbanganModel penerbangan,
+//            Model model
+//    ){
+//        model.addAttribute("penerbangan", penerbangan);
+//        if(penerbangan.getListPilotPenerbangan() == null || penerbangan.getListPilotPenerbangan().isEmpty()){
+//            penerbanganService.deletePenerbangan(penerbangan);
+//            return "delete-penerbangan";
+//        }else{
+//            return "error-delete-penerbangan";
+//        }
+//    }
+
 }

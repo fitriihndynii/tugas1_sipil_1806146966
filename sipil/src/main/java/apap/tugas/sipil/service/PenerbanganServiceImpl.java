@@ -30,4 +30,26 @@ public class PenerbanganServiceImpl implements PenerbanganService{
     public PenerbanganModel getPenerbanganById(Long id){
         return penerbanganDb.findById(id).get();
     }
+
+    @Override
+    public PenerbanganModel updatePenerbangan(PenerbanganModel penerbangan){
+        PenerbanganModel penerbanganUpdate = penerbanganDb.findById(penerbangan.getId()).get();
+
+        try{
+            penerbanganUpdate.setKode(penerbangan.getKode());
+            penerbanganUpdate.setWaktu(penerbangan.getWaktu());
+            penerbanganUpdate.setKotaAsal(penerbangan.getKotaAsal());
+            penerbanganUpdate.setKotaTujuan(penerbangan.getKotaTujuan());
+            penerbanganDb.save(penerbanganUpdate);
+            return penerbanganUpdate;
+        } catch (NullPointerException nullException){
+            return null;
+        }
+    }
+
+    @Override
+    public void deletePenerbangan(PenerbanganModel penerbangan){
+        penerbanganDb.delete(penerbangan);
+    }
+
 }
