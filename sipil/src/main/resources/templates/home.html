@@ -16,9 +16,15 @@
         </div>
         <div class="jumbotron col-md-12 col-sm-12 justify-content-md-center text-center" style="background: white">
             <h4 class="text-dark">Daftar Fitur: </h4>
-            <a th:href="@{/pilot}" class="btn btn-home text-light" style="background: #001B36"> Pilot </a>
-            <a th:href="@{/penerbangan}" class="btn btn-home text-light" style="background: #001B36"> Penerbangan </a>
-            <a href="#" class="btn btn-home text-light" style="background: #001B36"> Cari </a>
+            <a th:href="@{/pilot}" class="btn btn-home text-light" style="background: #001B36" role="button"> Pilot </a>
+            <a th:href="@{/penerbangan}" class="btn btn-home text-light" style="background: #001B36" role="button"> Penerbangan </a>
+            <a href="#submenu" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="submenu" class="btn btn-home text-light" style="background: #001B36"> Cari </a>
+            <div class="collapse" id="submenu" style="padding: 5px 10% 0px 60%">
+                <div class="dropdown-menu card card-body">
+                    <a th:href="@{/}" class="dropdown-item btn btn-home text-light" style="background: #001B36; padding-right: 5px" role="button"> Pilot berdasarkan Maskapai/Akademi </a>
+                    <a th:href="@{/}" class="dropdown-item btn btn-home text-light" style="background: #001B36" role="button"> Pilot dengan Penerbangan Terbanyak </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

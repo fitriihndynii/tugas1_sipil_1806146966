@@ -9,26 +9,32 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container">
-    <div class="col-md-12 col-sm-12">
-        <h2 class="text-light text-table">Detail Pilot</h2>
-        <h4 th:text=" 'Id                   : ' + ${pilot.id}"></h4>
-        <h4 th:text=" 'Nama                 : ' + ${pilot.nama}"></h4>
-        <h4 th:text=" 'NIK                  : ' + ${pilot.nik}"></h4>
-        <h4>
-            <div th:if="${pilot.jenisKelamin} == 1">Jenis Kelamin        : Laki-laki</div>
-            <div th:if="${pilot.jenisKelamin} == 2">Jenis Kelamin        : Perempuan</div>
-        </h4>
-        <h4 th:text=" 'NIP                  : ' + ${pilot.nip}"></h4>
-        <h4 th:text=" 'Tempat Lahir         : ' + ${pilot.tempatLahir}"></h4>
-        <h4 th:text=" 'Tanggal Lahir        : ' + ${#temporals.format(pilot.tanggalLahir, 'dd/MM/yyyy')}"></h4>
-        <h4 th:text=" 'Sekolah              : ' + ${pilot.akademi.nama}"></h4>
-        <h4 th:text=" 'Maskapai             : ' + ${pilot.maskapai.nama}"></h4>
-        <a th:href="@{/pilot/ubah/}+${pilot.nip}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a>
-        <a th:href="@{/pilot/hapus/}+${pilot.nip}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="col-md-12 col-sm-12">
+                <h4 class="text-light text-table">Detail Pilot</h4>
+                <h6 th:text=" 'Id &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.id}"></h6>
+                <h6 th:text=" 'Nama &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.nama}"></h6>
+                <h6 th:text=" 'NIK &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.nik}"></h6>
+                <h6>
+                    <div th:if="${pilot.jenisKelamin} == 1">Jenis Kelamin &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: Laki-laki</div>
+                    <div th:if="${pilot.jenisKelamin} == 2">Jenis Kelamin &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: Perempuan</div>
+                </h6>
+                <h6 th:text=" 'NIP &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.nip}"></h6>
+                <h6 th:text=" 'Tempat Lahir &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.tempatLahir}"></h6>
+                <h6 th:text=" 'Tanggal Lahir &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${#temporals.format(pilot.tanggalLahir, 'dd/MM/yyyy')}"></h6>
+                <h6 th:text=" 'Sekolah &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.akademi.nama}"></h6>
+                <h6 th:text=" 'Maskapai &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${pilot.maskapai.nama}"></h6>
+                <div style="justify-items: right; text-align: right">
+                    <a th:href="@{/pilot/ubah/}+${pilot.nip}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a>
+                    <a th:href="@{/pilot/hapus/}+${pilot.nip}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Jadwal Bertugas</h2>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover text-center">
             <thead>
             <tr>
                 <th scope="col">No</th>

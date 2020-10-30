@@ -33,7 +33,11 @@
                 <a class="nav-item nav-link active text-light" th:href="@{/penerbangan}">Penerbangan<span class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-item nav-link active text-light" th:href="@{/}">Cari<span class="sr-only"></span></a>
+                <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cari</a>
+                <div class="dropdown-menu" style="background: #001B36" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-light" th:href="@{/}">Pilot berdasarkan Maskapai/Akademi</a>
+                    <a class="dropdown-item text-light" th:href="@{/}">Pilot dengan Penerbangan Terbanyak</a>
+                </div>
             </li>
         </ul>
     </div>

@@ -9,19 +9,48 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="col-md-12 col-sm-12">
+                <h4 class="text-light text-table">Detail Penerbangan</h4>
+                <h6 th:text=" 'Id &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${penerbangan.id}"></h6>
+                <h6 th:text=" 'Kode Penerbangan &nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${penerbangan.kode}"></h6>
+                <h6 th:text=" 'Waktu &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${#temporals.format(penerbangan.waktu, 'HH:mm, dd MMMM yyyy')}"></h6>
+                <h6 th:text=" 'Kota Asal &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${penerbangan.kotaAsal}"></h6>
+                <h6 th:text=" 'Kota Tujuan &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: ' + ${penerbangan.kotaTujuan}"></h6>
+                <div style="justify-items: right; text-align: right">
+                    <a th:href="@{/penerbangan/ubah/}+${penerbangan.id}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a>
+                    <a th:href="@{/penerbangan/}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-md-12 col-sm-12">
-        <h2 class="text-light text-table">Detail Penerbangan</h2>
-        <h4 th:text=" 'Id                   : ' + ${penerbangan.id}"></h4>
-        <h4 th:text=" 'Kode Penerbangan     : ' + ${penerbangan.kode}"></h4>
-        <h4 th:text=" 'Waktu                : ' + ${#temporals.format(penerbangan.waktu, 'HH:mm, dd MMMM yyyy')}"></h4>
-        <h4 th:text=" 'Kota Asal            : ' + ${penerbangan.kotaAsal}"></h4>
-        <h4 th:text=" 'Kota Tujuan          : ' + ${penerbangan.kotaTujuan}"></h4>
-        <a th:href="@{/penerbangan/ubah/}+${penerbangan.id}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a>
-        <a th:href="@{/penerbangan/}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a>
+        <p><b>Pilih Pilot</b></p>
+        <table>
+            <thead>
+            <form th:action="@{/penerbangan/}+${penerbangan.id}+@{/pilot/tambah}" th:object="${pilot}" method="POST">
+            <input type="hidden" th:field="${penerbangan.id}">
+            <thead>
+                <tr>
+                <th>
+                    <select name="pilot" class="form-control">
+                        <option value="0">--Pilih Nama Pilot--</option>
+                        <option th:each="pilotObject:${listPilot}" th:value="*{pilotObject.id}" th:text="${pilotObject.nama}"></option>
+                    </select>
+                </th>
+                <th>
+                    <button type="submit" class="btn-primary btn btn-sm" role="button"> Tambah Pilot </button>
+                </th>
+                </tr>
+            </thead>
+            </form>
+            </thead>
+        </table>
     </div>
     <div class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Daftar Pilot</h2>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover text-center">
             <thead>
             <tr>
                 <th scope="col">No</th>

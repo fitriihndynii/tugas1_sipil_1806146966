@@ -14,6 +14,11 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
     PilotPenerbanganDb pilotPenerbanganDb;
 
     @Override
+    public void addPilotPenerbangan(PilotPenerbanganModel pilotPenerbangan){
+        pilotPenerbanganDb.save(pilotPenerbangan);
+    }
+
+    @Override
     public List<PilotPenerbanganModel> getListPilPenByPenerbangan(PenerbanganModel penerbangan){
         return pilotPenerbanganDb.findAllByPenerbangan(penerbangan);
     }

@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Daftar Penerbangan</h2>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover text-center">
             <thead>
             <tr>
                 <th scope="col">No</th>
@@ -28,15 +28,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">
+            <tr th:each="penerbangans, iterationStatus: ${listPenerbangan}">
+                <form th:action="@{/penerbangan/hapus}" th:object="${penerbangan}" method="POST">
+                <input type="hidden" th:value="${penerbangans.id}" name="idPenerbangan">
                 <td th:text="${iterationStatus.count}"></td>
-                <td th:text="${penerbangan.kode}"></td>
-                <td th:text="${#temporals.format(penerbangan.waktu, 'dd/MM/yyyy hh:mm a')}"></td>
-                <td th:text="${penerbangan.kotaAsal}"></td>
-                <td th:text="${penerbangan.kotaTujuan}"></td>
-                <td><a th:href="@{/penerbangan/detail/}+${penerbangan.id}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
-                <td><a th:href="@{/penerbangan/ubah/}+${penerbangan.id}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
-                <td><a href="#" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>
+                <td th:text="${penerbangans.kode}"></td>
+                <td th:text="${#temporals.format(penerbangans.waktu, 'dd/MM/yyyy hh:mm a')}"></td>
+                <td th:text="${penerbangans.kotaAsal}"></td>
+                <td th:text="${penerbangans.kotaTujuan}"></td>
+                <td><a th:href="@{/penerbangan/detail/}+${penerbangans.id}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
+                <td><a th:href="@{/penerbangan/ubah/}+${penerbangans.id}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
+<!--                <td><a th:href="@{/penerbangan/hapus/}+${penerbangans.id}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>-->
+                <td><button type="submit" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </button></td>
+                </form>
             </tr>
             </tbody>
         </table>

@@ -19,6 +19,9 @@ public class PenerbanganController {
     @Autowired
     PilotPenerbanganService pilotPenerbanganService;
 
+    @Autowired
+    PilotService pilotService;
+
     @GetMapping("/penerbangan")
     public String listPenerbangan(Model model){
         List<PenerbanganModel> listPenerbangan = penerbanganService.getPenerbanganList();
@@ -68,23 +71,41 @@ public class PenerbanganController {
     ){
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
 //        List<PilotPenerbanganModel> listPilotPenerbangan = pilotPenerbanganService.getListPilPenByPenerbangan(penerbangan);
+        List<PilotModel> listPilot = pilotService.getPilotList();
         model.addAttribute("penerbangan", penerbangan);
-        model.addAttribute("listPilPen", penerbangan.getListPilotPenerbangan());
+//        model.addAttribute("pilot", penerbangan.getListPilotPenerbangan());
 //        model.addAttribute("listPilpen", listPilotPenerbangan);
+        model.addAttribute("listPilot", listPilot);
         return "view-penerbangan";
     }
-//    @PostMapping("/penerbangan/hapus")
-//    public String deletePenerbangan(
-//            @ModelAttribute PenerbanganModel penerbangan,
-//            Model model
-//    ){
-//        model.addAttribute("penerbangan", penerbangan);
-//        if(penerbangan.getListPilotPenerbangan() == null || penerbangan.getListPilotPenerbangan().isEmpty()){
-//            penerbanganService.deletePenerbangan(penerbangan);
-//            return "delete-penerbangan";
-//        }else{
-//            return "error-delete-penerbangan";
-//        }
-//    }
+
+    @PostMapping("/penerbangan/hapus")
+    public String deletePenerbangan(
+            @RequestParam(value="idPenerbangan") Long idPenerbangan,
+            Model model
+    ){
+        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+        model.addAttribute("penerbangan", penerbangan);
+//        System.out.println("kode " + penerbangan.getKode());
+//        System.out.println("id " + idPenerbangan);
+        if(penerbangan.getListPilotPenerbangan() == null || penerbangan.getListPilotPenerbangan().isEmpty()){
+            penerbanganService.deletePenerbangan(penerbangan);
+            return "delete-penerbangan";
+        }else{
+            return "error-delete-penerbangan";
+        }
+    }
+
+    @PostMapping("/penerbangan/{idPenerbangan}/pilot/tambah")
+    public String tambahPilot(
+            @ModelAttribute Long idPilot, Long idPenerbangan,
+            Model model
+    ){
+//        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+//        penerbangan.getListPilotPenerbangan().
+        System.out.println("pilot " + idPilot);
+        System.out.println("penerbangan " + idPenerbangan);
+        return "tambah-pilot";
+    }
 
 }

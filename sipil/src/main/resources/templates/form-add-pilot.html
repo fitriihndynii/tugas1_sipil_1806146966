@@ -9,50 +9,54 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container-fluid">
-    <h3 class="text-table text-light">Tambah Pilot</h3>
-    <form th:action="@{/pilot/tambah}" th:object="${pilot}" method="POST">
-        <div class="form-group">
-            <label>Nama</label>
-            <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h3 class="text-table text-light">Tambah Pilot</h3>
+            <form th:action="@{/pilot/tambah}" th:object="${pilot}" method="POST">
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label>NIK</label>
+                    <input type="number" name="nik" class="form-control" placeholder="NIK">
+                </div>
+                <div class="form-group">
+                    <label>Tempat Lahir</label>
+                    <input type="text" name="tempatLahir" class="form-control" placeholder="Tempat Lahir">
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Lahir</label>
+                    <input th:text="${#temporals.format(localDate, 'dd/MM/yyyy')}" name="tanggalLahir" class="form-control" placeholder="DD/MM/YYYY">
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select name="jenisKelamin" class="form-control">
+                        <option value="1">Laki-Laki</option>
+                        <option value="2" selected>Perempuan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sekolah</label>
+                    <select name="akademi" class="form-control" th:field="*{akademi}">
+                        <option value="0">Pilih Sekolah</option>
+                        <option th:each="akademiObject:${akademi}" th:value="${akademiObject.id}" th:text="${akademiObject.nama}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Maskapai</label>
+                    <select name="maskapai" class="form-control" th:field="*{maskapai}">
+                        <option value="0">Pilih Maskapai</option>
+                        <option th:each="maskapaiObject:${maskapai}" th:value="${maskapaiObject.id}" th:text="${maskapaiObject.nama}"></option>
+                    </select>
+                </div>
+                <div style="justify-items: right; text-align: right">
+                    <a th:href="@{/pilot}" class="btn btn-light btn-outline-dark" role="button">Batal</a>
+                    <button type="submit" class="btn btn-light text-light" style="background: #001B36;">Tambah</button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label>NIK</label>
-            <input type="number" name="nik" class="form-control" placeholder="NIK">
-        </div>
-        <div class="form-group">
-            <label>Tempat Lahir</label>
-            <input type="text" name="tempatLahir" class="form-control" placeholder="Tempat Lahir">
-        </div>
-        <div class="form-group">
-            <label>Tanggal Lahir</label>
-            <input th:text="${#temporals.format(localDate, 'dd/MM/yyyy')}" name="tanggalLahir" class="form-control" placeholder="DD/MM/YYYY">
-        </div>
-        <div class="form-group">
-            <label>Jenis Kelamin</label>
-            <select name="jenisKelamin" class="form-control">
-                <option value="1">Laki-Laki</option>
-                <option value="2" selected>Perempuan</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Sekolah</label>
-            <select name="akademi" class="form-control" th:field="*{akademi}">
-                <option value="0">Pilih Sekolah</option>
-                <option th:each="akademiObject:${akademi}" th:value="${akademiObject.id}" th:text="${akademiObject.nama}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Maskapai</label>
-            <select name="maskapai" class="form-control" th:field="*{maskapai}">
-                <option value="0">Pilih Maskapai</option>
-                <option th:each="maskapaiObject:${maskapai}" th:value="${maskapaiObject.id}" th:text="${maskapaiObject.nama}"></option>
-            </select>
-        </div>
-        <div>
-            <a th:href="@{/pilot}" class="btn btn-sm tombol-batal" role="button">Batal</a>
-            <button type="submit" class="btn btn-primary tombol-tambah-bawah">Tambah</button>
-        </div>
-    </form>
+    </div>
 </div>
 </body>
 </html>
