@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class PilotController {
@@ -89,30 +88,51 @@ public class PilotController {
         return "update-pilot";
     }
 
-//    @RequestMapping("/pilot/hapus/{nipPilot}")
-//    public String deletePilot(
-//            @PathVariable String nipPilot,
-//            Model model
-//    ){
-//        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
-//        Set<PilotPenerbanganModel> listPilotPenerbangan = pilot.getListPilotPenerbangan();
-//        model.addAttribute("pilot", pilot);
-//        if(listPilotPenerbangan.size() == 0){
-//            pilotService.deletePilot(pilot);
-//            return "delete-pilot";
-//        }else{
-//            return "error-delete-pilot";
-//        }
-//    }
-
     @PostMapping("/pilot/hapus")
     public String deletePilot(
             @RequestParam(value="idPilot") Long idPilot,
             Model model
     ){
         PilotModel pilot = pilotService.getPilotByIdPilot(idPilot);
+        pilot.getListPilotPenerbangan().clear();
         pilotService.deletePilot(pilot);
         model.addAttribute("pilot", pilot);
         return "delete-pilot";
+    }
+
+//    @GetMapping("/cari")
+//    public String cariPilotMaskapaiAkademi(Model model){
+//        List<MaskapaiModel> maskapaiList = maskapaiService.getListMaskapai();
+//        List<AkademiModel> akademiList = akademiService.getListAkademi();
+//        model.addAttribute("maskapaiList", maskapaiList);
+//        model.addAttribute("akademiList", akademiList);
+//        return "cari-maskapai-akademi";
+//    }
+
+    @GetMapping("/cari/pilot")
+    public String cariPilot(
+            @RequestParam(value = "kodeMaskapai", required = false) String kodeMaskapai,
+            @RequestParam(value = "idSekolah", required = false) Long idSekolah,
+            Model model
+    ){
+        List<MaskapaiModel> maskapaiList = maskapaiService.getListMaskapai();
+        List<AkademiModel> akademiList = akademiService.getListAkademi();
+        model.addAttribute("maskapaiList", maskapaiList);
+        model.addAttribute("akademiList", akademiList);
+        List<PilotModel> listPilot;
+        if(kodeMaskapai != null && idSekolah != null) {
+            if (kodeMaskapai.equalsIgnoreCase("0")) {
+                listPilot = pilotService.pilotByAkademi(idSekolah);
+            } else if (idSekolah == 0) {
+                listPilot = pilotService.pilotByMaskapai(kodeMaskapai);
+            } else {
+                listPilot = pilotService.pilotByMaskapaiAndAkademi(kodeMaskapai, idSekolah);
+            }
+            model.addAttribute("listPilot", listPilot);
+            model.addAttribute("adaPilot", true);
+        }
+        System.out.println("maskapai " + kodeMaskapai);
+        System.out.println("akademi " + idSekolah);
+        return "cari-maskapai-akademi";
     }
 }

@@ -33,4 +33,13 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
     public List<PilotPenerbanganModel> getListPilPenByPenerbangan(PenerbanganModel penerbangan){
         return pilotPenerbanganDb.findAllByPenerbangan(penerbangan);
     }
+
+    @Override
+    public void deletePilotPenerbangan(PilotModel pilot){
+        List<PilotPenerbanganModel> pilpen = pilotPenerbanganDb.findAllByPilot(pilot);
+        System.out.println("pilpen " + pilpen==null);
+        for(PilotPenerbanganModel pilots :pilpen){
+            pilotPenerbanganDb.delete(pilots);
+        }
+    }
 }

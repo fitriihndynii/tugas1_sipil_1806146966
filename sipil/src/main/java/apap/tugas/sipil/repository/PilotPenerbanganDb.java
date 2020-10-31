@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface PilotPenerbanganDb extends JpaRepository<PilotPenerbanganModel, Long> {
     List<PilotPenerbanganModel> findAllByPenerbangan(PenerbanganModel penerbanganModel);
+    List<PilotPenerbanganModel> findAllByPilot(PilotModel pilot);
 }

@@ -13,4 +13,7 @@ public interface PilotService {
     PilotModel updatePilot(PilotModel pilot);
     void oldPilot(PilotModel pilot);
     void deletePilot(PilotModel pilot);
+    List<PilotModel> pilotByMaskapaiAndAkademi(String kode, Long id);
+    List<PilotModel> pilotByMaskapai(String kode);
+    List<PilotModel> pilotByAkademi(Long id);
 }

@@ -50,6 +50,4 @@ public class PenerbanganServiceImpl implements PenerbanganService{
         penerbanganDb.delete(penerbangan);
     }
 
-//    @Override
-//    public void tambahPilot()
 }

@@ -16,6 +16,8 @@ public class PilotServiceImpl implements PilotService{
     @Autowired
     PilotDb pilotDb;
 
+    PilotPenerbanganService pilotPenerbanganService;
+
     private PilotModel oldPilot;
 
     @Override
@@ -85,6 +87,23 @@ public class PilotServiceImpl implements PilotService{
 
     @Override
     public void deletePilot(PilotModel pilot){
+        System.out.println("pilottt " + pilot);
+        pilotPenerbanganService.deletePilotPenerbangan(pilot);
         pilotDb.delete(pilot);
+    }
+
+    @Override
+    public List<PilotModel> pilotByMaskapaiAndAkademi(String kode, Long id){
+        return pilotDb.findAllByMaskapai_KodeAndAkademi_Id(kode, id);
+    }
+
+    @Override
+    public List<PilotModel> pilotByMaskapai(String kode){
+        return pilotDb.findAllByMaskapai_Kode(kode);
+    }
+
+    @Override
+    public List<PilotModel> pilotByAkademi(Long id){
+        return pilotDb.findAllByAkademi_Id(id);
     }
 }

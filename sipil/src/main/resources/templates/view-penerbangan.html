@@ -68,12 +68,12 @@
                 <td th:text="${iterationStatus.count}"></td>
                 <td th:text="${pilpen.pilot.nama}"></td>
                 <td th:text="${pilpen.pilot.nip}"></td>
-                <td th:text="${#temporals.format(pilpen.pilot.tanggalLahir, 'dd/MM/yy')}"></td>
+                <td th:text="${#temporals.format(pilpen.pilot.tanggalLahir, 'dd/MM/yyyy')}"></td>
                 <td>
                     <div th:if="${pilpen.pilot.jenisKelamin} == 1">Laki-laki</div>
                     <div th:if="${pilpen.pilot.jenisKelamin} == 2">Perempuan</div>
                 </td>
-                <td th:text="${pilpen.tanggalPenugasan}"></td>
+                <td th:text="${#temporals.format(pilpen.tanggalPenugasan, 'dd/MM/yyyy')}"></td>
             </tr>
             </tbody>
         </table>

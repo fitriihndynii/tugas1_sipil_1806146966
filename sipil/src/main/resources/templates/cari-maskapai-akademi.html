@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>View Pilot</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="wrapper fadeInDown">
+<!--        <div id="formContent">-->
+        <form th:action="@{/cari/pilot}" method="GET">
+            <div class="row">
+                <div class="col-5">
+                    <p><b>Pilih Kode Maskapai</b></p>
+                    <select class="form-control" name="kodeMaskapai"  >
+                        <option value="0">Kode Maskapai</option>
+                        <option th:each="maskapai:${maskapaiList}" th:value="${maskapai.kode}" th:text="${maskapai.kode}"></option>
+                    </select>
+                </div>
+                <div class="col-5">
+                    <p><b>Pilih Nama Sekolah</b></p>
+                    <select class="form-control" name="idSekolah"  >
+                        <option value="0">Nama Sekolah</option>
+                        <option th:each="akademi:${akademiList}" th:value="${akademi.id}" th:text="${akademi.nama}"></option>
+                    </select>
+                </div>
+                <div style="padding: 9% 0px 0px 0px" class="col">
+                    <button type="submit" class="btn-primary btn btn-sm" role="button"> Cari </button>
+                </div>
+            </div>
+        </form>
+<!--        </div>-->
+    </div>
+    <div th:if="${adaPilot}" class="col-md-12 col-sm-12">
+        <h2  class="text-light text-table">Daftar Pilot Berdasarkan Maskapai atau Sekolah</h2>
+        <table class="table table-responsive table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">NIP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pilot, iterationStatus: ${listPilot}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${pilot.nama}"></td>
+                <td th:text="${pilot.nip}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
