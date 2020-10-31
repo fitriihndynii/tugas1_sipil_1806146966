@@ -5,6 +5,7 @@ import apap.tugas.sipil.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,6 +17,16 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
     @Override
     public void addPilotPenerbangan(PilotPenerbanganModel pilotPenerbangan){
         pilotPenerbanganDb.save(pilotPenerbangan);
+    }
+
+    @Override
+    public PilotPenerbanganModel createPilPen(PilotModel pilot, PenerbanganModel penerbangan){
+        PilotPenerbanganModel pilpen = new PilotPenerbanganModel();
+        pilpen.setPilot(pilot);
+        pilpen.setPenerbangan(penerbangan);
+        pilpen.setTanggalPenugasan(LocalDate.now());
+        addPilotPenerbangan(pilpen);
+        return pilpen;
     }
 
     @Override

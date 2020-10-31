@@ -50,6 +50,11 @@ public class PilotServiceImpl implements PilotService{
     }
 
     @Override
+    public PilotModel getPilotByIdPilot(Long id){
+        return pilotDb.findById(id).get();
+    }
+
+    @Override
     public PilotModel updatePilot(PilotModel pilot){
         PilotModel targetPilot = pilotDb.findByNip(pilot.getNip()).get();
 

@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface PilotDb extends JpaRepository<PilotModel, String> {
     List<PilotModel> findAll();
     Optional<PilotModel> findByNip(String nip);
+    Optional<PilotModel> findById(Long id);
 }

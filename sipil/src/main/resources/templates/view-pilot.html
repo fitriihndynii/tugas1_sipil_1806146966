@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Jadwal Bertugas</h2>
-        <table class="table table-striped table-hover text-center">
+        <table class="table table-responsive table-striped table-hover text-center">
             <thead>
             <tr>
                 <th scope="col">No</th>
@@ -52,7 +52,7 @@
                 <td th:text="${#temporals.format(pilpen.penerbangan.waktu, 'HH:mm, dd/MM/yy')}"></td>
                 <td th:text="${pilpen.penerbangan.kotaAsal}"></td>
                 <td th:text="${pilpen.penerbangan.kotaTujuan}"></td>
-                <td><a href="#" class="btn btn-sm btn-light text-light tombol-lihat" role="button"> Lihat </a></td>
+                <td><a th:href="@{/penerbangan/detail/}+${pilpen.penerbangan.id}" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
             </tr>
             </tbody>
         </table>

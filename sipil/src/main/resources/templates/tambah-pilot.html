@@ -8,7 +8,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container">
-    <h2 class="text-center" th:text=" 'Pilot bernama ' + 'xxx' + ' berhasil ditambahkan pada Penerbangan'"></h2>
+    <h2 class="text-center" th:text=" 'Pilot bernama ' + ${pilot.nama} + ' berhasil ditambahkan pada Penerbangan ' + ${penerbangan.kode}"></h2>
     <a th:href="@{/penerbangan}">Kembali ke Daftar Penerbangan</a>
 </div>
 </body>

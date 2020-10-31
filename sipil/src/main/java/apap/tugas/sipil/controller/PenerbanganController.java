@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class PenerbanganController {
@@ -70,11 +69,9 @@ public class PenerbanganController {
             Model model
     ){
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
-//        List<PilotPenerbanganModel> listPilotPenerbangan = pilotPenerbanganService.getListPilPenByPenerbangan(penerbangan);
         List<PilotModel> listPilot = pilotService.getPilotList();
         model.addAttribute("penerbangan", penerbangan);
-//        model.addAttribute("pilot", penerbangan.getListPilotPenerbangan());
-//        model.addAttribute("listPilpen", listPilotPenerbangan);
+        model.addAttribute("pilotBertugas", penerbangan.getListPilotPenerbangan());
         model.addAttribute("listPilot", listPilot);
         return "view-penerbangan";
     }
@@ -86,8 +83,6 @@ public class PenerbanganController {
     ){
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
         model.addAttribute("penerbangan", penerbangan);
-//        System.out.println("kode " + penerbangan.getKode());
-//        System.out.println("id " + idPenerbangan);
         if(penerbangan.getListPilotPenerbangan() == null || penerbangan.getListPilotPenerbangan().isEmpty()){
             penerbanganService.deletePenerbangan(penerbangan);
             return "delete-penerbangan";
@@ -98,13 +93,15 @@ public class PenerbanganController {
 
     @PostMapping("/penerbangan/{idPenerbangan}/pilot/tambah")
     public String tambahPilot(
-            @ModelAttribute Long idPilot, Long idPenerbangan,
+            @ModelAttribute PilotModel pilot, @PathVariable Long idPenerbangan,
             Model model
     ){
-//        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
-//        penerbangan.getListPilotPenerbangan().
-        System.out.println("pilot " + idPilot);
-        System.out.println("penerbangan " + idPenerbangan);
+        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+        PilotModel pilotPenerbangan = pilotService.getPilotByIdPilot(pilot.getId());
+        PilotPenerbanganModel pilpen = pilotPenerbanganService.createPilPen(pilotPenerbangan, penerbangan);
+        penerbangan.getListPilotPenerbangan().add(pilpen);
+        model.addAttribute("pilot", pilotPenerbangan);
+        model.addAttribute("penerbangan", penerbangan);
         return "tambah-pilot";
     }
 
