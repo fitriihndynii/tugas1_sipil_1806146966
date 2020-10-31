@@ -97,6 +97,11 @@ public class PenerbanganController {
             Model model
     ){
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+        if(pilot.getId() == 0 || pilot.getId() == null){
+            model.addAttribute("penerbangan", penerbangan);
+            model.addAttribute("idPenerbangan", idPenerbangan);
+            return "error-tambah-pilot";
+        }
         PilotModel pilotPenerbangan = pilotService.getPilotByIdPilot(pilot.getId());
         PilotPenerbanganModel pilpen = pilotPenerbanganService.createPilPen(pilotPenerbangan, penerbangan);
         penerbangan.getListPilotPenerbangan().add(pilpen);

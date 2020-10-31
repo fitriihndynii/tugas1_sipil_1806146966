@@ -20,32 +20,32 @@
             </div>
             <div class="form-group">
                 <label>NIK</label>
-                <input type="number" name="nik" class="form-control" th:value="*{nik}">
+                <input type="number" name="nik" class="form-control" th:value="*{nik}" required>
             </div>
             <div class="form-group">
                 <label>Tempat Lahir</label>
-                <input type="text" name="tempatLahir" class="form-control" th:value="*{tempatLahir}">
+                <input type="text" name="tempatLahir" class="form-control" th:value="*{tempatLahir}" required>
             </div>
             <div class="form-group">
                 <label>Tanggal Lahir</label>
-                <input th:text="${#temporals.format(localDate, 'dd/MM/yyyy')}" name="tanggalLahir" class="form-control" th:value="*{#temporals.format(tanggalLahir, 'dd/MM/yyyy')}">
+                <input th:text="${#temporals.format(localDate, 'dd/MM/yyyy')}" name="tanggalLahir" class="form-control" th:value="*{#temporals.format(tanggalLahir, 'dd/MM/yyyy')}" required>
             </div>
             <div class="form-group">
                 <label>Jenis Kelamin</label>
-                <select name="jenisKelamin" th:field="*{jenisKelamin}" class="form-control">
+                <select name="jenisKelamin" th:field="*{jenisKelamin}" class="form-control" required>
                     <option value="1">Laki-Laki</option>
                     <option value="2">Perempuan</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Sekolah</label>
-                <select name="akademi" class="form-control" th:field="*{akademi}">
+                <select name="akademi" class="form-control" th:field="*{akademi}" required>
                     <option th:each="akademiObject:${akademi}" th:value="${akademiObject.id}" th:text="${akademiObject.nama}"></option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Maskapai</label>
-                <select name="maskapai" class="form-control" th:field="*{maskapai}">
+                <select name="maskapai" class="form-control" th:field="*{maskapai}" required>
                     <option th:each="maskapaiObject:${maskapai}" th:value="${maskapaiObject.id}" th:text="${maskapaiObject.nama}"></option>
                 </select>
             </div>

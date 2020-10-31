@@ -19,15 +19,15 @@
                 </div>
                 <div class="form-group">
                     <label>Waktu</label>
-                    <input th:text="${#temporals.format(localDateTime, 'dd/MM/yyyy hh:mm a')}" name="waktu" class="form-control" placeholder="DD/MM/YYYY HH:MM AM/PM">
+                    <input th:text="${#temporals.format(localDateTime, 'dd/MM/yyyy hh:mm a')}" name="waktu" class="form-control" placeholder="DD/MM/YYYY HH:MM AM/PM" required>
                 </div>
                 <div class="form-group">
                     <label>Kota Asal</label>
-                    <input type="text" name="kotaAsal" class="form-control" placeholder="Kota Asal">
+                    <input type="text" name="kotaAsal" class="form-control" placeholder="Kota Asal" required>
                 </div>
                 <div class="form-group">
                     <label>Kota Tujuan</label>
-                    <input type="text" name="kotaTujuan" class="form-control" placeholder="Kota Tujuan">
+                    <input type="text" name="kotaTujuan" class="form-control" placeholder="Kota Tujuan" required>
                 </div>
                 <div style="justify-items: right; text-align: right">
                     <a th:href="@{/penerbangan}" class="btn btn-light btn-outline-dark" role="button">Batal</a>

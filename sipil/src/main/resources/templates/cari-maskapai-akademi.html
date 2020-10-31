@@ -32,9 +32,9 @@
             </div>
         </form>
     </div>
-    <div th:if="${adaPilot} == 2" class="col-md-12 col-sm-12">
+    <div th:if="${adaPilot} == 0" class="col-md-12 col-sm-12">
         <h2  class="text-light text-table">Daftar Pilot Berdasarkan Maskapai atau Sekolah</h2>
-        <table class="table table-responsive table-striped table-hover text-center">
+        <table class="table table-responsive-xl table-striped table-hover text-center">
             <thead>
             <tr>
                 <th scope="col">No</th>
@@ -51,9 +51,9 @@
             </tbody>
         </table>
     </div>
-<!--    <div th:unless="${adaPilot} == 1">-->
-<!--        <h3>Tidak terdapat pilot pada maskapai dan/ akademi tersebut</h3>-->
-<!--    </div>-->
+    <div th:if="${adaPilot} == 1">
+        <h3>Tidak terdapat pilot pada maskapai dan/ akademi tersebut</h3>
+    </div>
 </div>
 </div>
 </body>

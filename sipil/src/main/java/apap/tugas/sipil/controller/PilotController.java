@@ -52,6 +52,9 @@ public class PilotController {
     public String addPilotSubmit(
             @ModelAttribute PilotModel pilot,
             Model model){
+        if(pilot.getMaskapai() == null || pilot.getAkademi() == null){
+            return "error-add-pilot";
+        }
         pilotService.addPilot(pilot);
         model.addAttribute("nip", pilot.getNip());
         return "add-pilot";
@@ -118,9 +121,8 @@ public class PilotController {
         model.addAttribute("maskapaiList", maskapaiList);
         model.addAttribute("akademiList", akademiList);
         if(kodeMaskapai != null && idSekolah != null) {
-            System.out.println("masuk sini");
             List<PilotModel> listPilot;
-            int adaPilot = 1;
+            int adaPilot = 0;
             if (kodeMaskapai.equalsIgnoreCase("0")) {
                 listPilot = pilotService.pilotByAkademi(idSekolah);
             } else if (idSekolah == 0) {
@@ -128,8 +130,8 @@ public class PilotController {
             } else {
                 listPilot = pilotService.pilotByMaskapaiAndAkademi(kodeMaskapai, idSekolah);
             }
-            if(!listPilot.isEmpty()){
-                adaPilot = 2;
+            if(kodeMaskapai.equalsIgnoreCase("0") && idSekolah==0 || listPilot.isEmpty()){
+                adaPilot = 1;
             }
             model.addAttribute("listPilot", listPilot);
             model.addAttribute("adaPilot", adaPilot);
@@ -145,8 +147,13 @@ public class PilotController {
         List<MaskapaiModel> maskapaiList = maskapaiService.getListMaskapai();
         model.addAttribute("maskapaiList", maskapaiList);
         if (kodeMaskapai != null){
+            int adaPilot = 0;
             LinkedHashMap<PilotModel, Integer> pilpen = pilotService.pilotPenerbanganTerbanyak(kodeMaskapai);
+            if (pilpen.size() < 1){
+                adaPilot = 1;
+            }
             model.addAttribute("pilpen",pilpen);
+            model.addAttribute("adaPilot",adaPilot);
         }
         return "cari-pilpen-terbanyak";
     }
