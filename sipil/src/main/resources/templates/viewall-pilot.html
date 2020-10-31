@@ -30,6 +30,8 @@
             </thead>
             <tbody>
             <tr th:each="pilot, iterationStatus: ${listPilot}">
+                <form th:action="@{/pilot/hapus}" th:object="${pilot}" method="POST">
+                <input type="hidden" th:value="${pilot.id}" name="idPilot">
                 <td th:text="${iterationStatus.count}"></td>
                 <td th:text="${pilot.nama}"></td>
                 <td th:text="${pilot.nip}"></td>
@@ -41,7 +43,8 @@
                 </td>
                 <td><a th:href="@{/pilot/}+${pilot.nip}" methods="GET" class="btn btn-sm text-light tombol-lihat" style="background: #1b4a88" role="button"> Lihat </a></td>
                 <td><a th:href="@{/pilot/ubah/}+${pilot.nip}" class="btn btn-sm text-light tombol-ubah" style="background: #061c32" role="button"> Ubah </a></td>
-                <td><a th:href="@{/pilot/hapus/}+${pilot.nip}" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </a></td>
+                <td><button type="submit" class="btn btn-sm text-light tombol-hapus" style="background: #2f0800" role="button"> Hapus </button></td>
+                </form>
             </tr>
             </tbody>
         </table>

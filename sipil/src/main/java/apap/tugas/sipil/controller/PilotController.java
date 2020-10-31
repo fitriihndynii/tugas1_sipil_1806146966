@@ -89,19 +89,30 @@ public class PilotController {
         return "update-pilot";
     }
 
-    @RequestMapping("/pilot/hapus/{nipPilot}")
+//    @RequestMapping("/pilot/hapus/{nipPilot}")
+//    public String deletePilot(
+//            @PathVariable String nipPilot,
+//            Model model
+//    ){
+//        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
+//        Set<PilotPenerbanganModel> listPilotPenerbangan = pilot.getListPilotPenerbangan();
+//        model.addAttribute("pilot", pilot);
+//        if(listPilotPenerbangan.size() == 0){
+//            pilotService.deletePilot(pilot);
+//            return "delete-pilot";
+//        }else{
+//            return "error-delete-pilot";
+//        }
+//    }
+
+    @PostMapping("/pilot/hapus")
     public String deletePilot(
-            @PathVariable String nipPilot,
+            @RequestParam(value="idPilot") Long idPilot,
             Model model
     ){
-        PilotModel pilot = pilotService.getPilotByNipPilot(nipPilot);
-        Set<PilotPenerbanganModel> listPilotPenerbangan = pilot.getListPilotPenerbangan();
+        PilotModel pilot = pilotService.getPilotByIdPilot(idPilot);
+        pilotService.deletePilot(pilot);
         model.addAttribute("pilot", pilot);
-        if(listPilotPenerbangan.size() == 0){
-            pilotService.deletePilot(pilot);
-            return "delete-pilot";
-        }else{
-            return "error-delete-pilot";
-        }
+        return "delete-pilot";
     }
 }
