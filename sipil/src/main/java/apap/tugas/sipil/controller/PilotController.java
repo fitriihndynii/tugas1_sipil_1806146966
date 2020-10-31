@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -100,15 +102,6 @@ public class PilotController {
         return "delete-pilot";
     }
 
-//    @GetMapping("/cari")
-//    public String cariPilotMaskapaiAkademi(Model model){
-//        List<MaskapaiModel> maskapaiList = maskapaiService.getListMaskapai();
-//        List<AkademiModel> akademiList = akademiService.getListAkademi();
-//        model.addAttribute("maskapaiList", maskapaiList);
-//        model.addAttribute("akademiList", akademiList);
-//        return "cari-maskapai-akademi";
-//    }
-
     @GetMapping("/cari/pilot")
     public String cariPilot(
             @RequestParam(value = "kodeMaskapai", required = false) String kodeMaskapai,
@@ -119,8 +112,10 @@ public class PilotController {
         List<AkademiModel> akademiList = akademiService.getListAkademi();
         model.addAttribute("maskapaiList", maskapaiList);
         model.addAttribute("akademiList", akademiList);
-        List<PilotModel> listPilot;
         if(kodeMaskapai != null && idSekolah != null) {
+            System.out.println("masuk sini");
+            List<PilotModel> listPilot;
+            int adaPilot = 1;
             if (kodeMaskapai.equalsIgnoreCase("0")) {
                 listPilot = pilotService.pilotByAkademi(idSekolah);
             } else if (idSekolah == 0) {
@@ -128,11 +123,37 @@ public class PilotController {
             } else {
                 listPilot = pilotService.pilotByMaskapaiAndAkademi(kodeMaskapai, idSekolah);
             }
+            if(!listPilot.isEmpty()){
+                adaPilot = 2;
+            }
             model.addAttribute("listPilot", listPilot);
-            model.addAttribute("adaPilot", true);
+            model.addAttribute("adaPilot", adaPilot);
         }
-        System.out.println("maskapai " + kodeMaskapai);
-        System.out.println("akademi " + idSekolah);
         return "cari-maskapai-akademi";
+    }
+
+    @GetMapping("/cari/pilot/penerbangan-terbanyak")
+    public String pilPenTerbanyak(
+            @RequestParam(value = "kodeMaskapai", required = false) String kodeMaskapai,
+            Model model
+    ){
+        List<MaskapaiModel> maskapaiList = maskapaiService.getListMaskapai();
+        model.addAttribute("maskapaiList", maskapaiList);
+        if (kodeMaskapai != null){
+            LinkedHashMap<PilotModel, Integer> pilpen = pilotService.pilotPenerbanganTerbanyak(kodeMaskapai);
+//            List<Integer> tugas = new LinkedList<>();
+//            for(PilotModel pilot: pilpen){
+//                tugas.add(pilot.getListPilotPenerbangan().size());
+//            }
+            model.addAttribute("pilpen",pilpen);
+//            model.addAttribute("tugas", tugas);
+        }
+        return "cari-pilpen-terbanyak";
+    }
+
+    @GetMapping("/cari/pilot/bulan-ini")
+    public String pilotBulanIni(Model model){
+        model.addAttribute("pilotBulanIni", pilotPenerbanganService.pilotBulanIni());
+        return "pilot-bulan-ini";
     }
 }

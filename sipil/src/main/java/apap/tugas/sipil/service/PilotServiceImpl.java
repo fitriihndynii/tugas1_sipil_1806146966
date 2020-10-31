@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Transactional
@@ -105,5 +104,31 @@ public class PilotServiceImpl implements PilotService{
     @Override
     public List<PilotModel> pilotByAkademi(Long id){
         return pilotDb.findAllByAkademi_Id(id);
+    }
+
+    @Override
+    public LinkedHashMap<PilotModel, Integer> pilotPenerbanganTerbanyak(String kode){
+        List<PilotModel> pilpen = pilotDb.findDistinctByMaskapai_KodeOrderByListPilotPenerbanganDesc(kode);
+        LinkedHashMap<PilotModel, Integer> pilpenTerbanyak = new LinkedHashMap<PilotModel, Integer>();
+        for (PilotModel pilot:pilpen){
+            pilpenTerbanyak.put(pilot, pilot.getListPilotPenerbangan().size());
+        }
+        LinkedHashMap<PilotModel, Integer> sorted = new LinkedHashMap<>();
+        pilpenTerbanyak.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).forEachOrdered(p -> sorted.put(p.getKey(), p.getValue()));
+        List<PilotModel> sortedPilpen = new LinkedList<>();
+        for (PilotModel pilot: sorted.keySet()){
+            sortedPilpen.add(pilot);
+        }
+        //Pilih 3 terbaik
+//        List<PilotModel> tigaSortedPilpen = new LinkedList<>();
+        LinkedHashMap<PilotModel, Integer> tigaSortedPilpen = new LinkedHashMap<>();
+        if(sorted.size() > 3){
+            for (int i =0; i < 3; i++){
+                tigaSortedPilpen.put(sortedPilpen.get(i), sortedPilpen.get(i).getListPilotPenerbangan().size());
+            }
+            return tigaSortedPilpen;
+        }else{
+            return sorted;
+        }
     }
 }

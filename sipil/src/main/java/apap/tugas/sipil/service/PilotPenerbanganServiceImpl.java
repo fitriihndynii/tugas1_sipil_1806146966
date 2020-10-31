@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -41,5 +44,18 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
         for(PilotPenerbanganModel pilots :pilpen){
             pilotPenerbanganDb.delete(pilots);
         }
+    }
+
+    @Override
+    public Set<PilotModel> pilotBulanIni(){
+        LocalDate start = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1);
+        LocalDate end = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).plusMonths(1).withDayOfMonth(1).minusDays(1);
+        List<PilotPenerbanganModel> pilpenBulanIni = pilotPenerbanganDb.findByTanggalPenugasanGreaterThanAndTanggalPenugasanLessThan(start, end);
+        System.out.println("pilpen " + pilpenBulanIni);
+        Set<PilotModel> listPilotBulanIni = new HashSet<PilotModel>();
+        for (PilotPenerbanganModel pilpen: pilpenBulanIni){
+            listPilotBulanIni.add(pilpen.getPilot());
+        }
+        return listPilotBulanIni;
     }
 }

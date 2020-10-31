@@ -14,4 +14,5 @@ public interface PilotDb extends JpaRepository<PilotModel, String> {
     List<PilotModel> findAllByMaskapai_KodeAndAkademi_Id(String Kode, Long id);
     List<PilotModel> findAllByMaskapai_Kode(String Kode);
     List<PilotModel> findAllByAkademi_Id(Long id);
+    List<PilotModel> findDistinctByMaskapai_KodeOrderByListPilotPenerbanganDesc(String kode);
 }

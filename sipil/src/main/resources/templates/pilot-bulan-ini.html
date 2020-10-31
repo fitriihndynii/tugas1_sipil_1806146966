@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>View All Pilot</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <h2  class="text-light text-table">Daftar Pilot Pada Penerbangan Bulan Ini</h2>
+        <table class="table table-responsive table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">NIP</th>
+                <th scope="col">Tanggal Lahir</th>
+                <th scope="col">Jenis Kelamin</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pilot, iterationStatus: ${pilotBulanIni}">
+                <form th:action="@{/pilot/hapus}" th:object="${pilot}" method="POST">
+                    <input type="hidden" th:value="${pilot.id}" name="idPilot">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${pilot.nama}"></td>
+                    <td th:text="${pilot.nip}"></td>
+                    <td th:text="${#temporals.format(pilot.tanggalLahir, 'dd/MM/yyyy')}"></td>
+                    <td>
+                        <div th:if="${pilot.jenisKelamin == 1}">Laki-laki</div>
+                        <div th:if="${pilot.jenisKelamin == 2}">Perempuan</div>
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

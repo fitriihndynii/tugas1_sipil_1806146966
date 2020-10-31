@@ -2,6 +2,7 @@ package apap.tugas.sipil.service;
 
 import apap.tugas.sipil.model.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface PilotService {
@@ -16,4 +17,5 @@ public interface PilotService {
     List<PilotModel> pilotByMaskapaiAndAkademi(String kode, Long id);
     List<PilotModel> pilotByMaskapai(String kode);
     List<PilotModel> pilotByAkademi(Long id);
+    LinkedHashMap<PilotModel, Integer> pilotPenerbanganTerbanyak(String kode);
 }
