@@ -13,5 +13,6 @@ public interface PilotPenerbanganDb extends JpaRepository<PilotPenerbanganModel,
     List<PilotPenerbanganModel> findAllByPenerbangan(PenerbanganModel penerbanganModel);
     List<PilotPenerbanganModel> findAllByPilot(PilotModel pilot);
     List<PilotPenerbanganModel> findAll();
+    List<PilotPenerbanganModel> findAllByTanggalPenugasanGreaterThan(LocalDate date);
 //    List<PilotPenerbanganModel> findDistinctByTanggalPenugasanContaining(Month month);
 }

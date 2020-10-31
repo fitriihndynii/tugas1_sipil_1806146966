@@ -47,7 +47,8 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
 
     @Override
     public Set<PilotModel> pilotBulanIni(){
-        List<PilotPenerbanganModel> listPilpen = pilotPenerbanganDb.findAll();
+        LocalDate sebulanLalu = LocalDate.now().minusDays(30);
+        List<PilotPenerbanganModel> listPilpen = pilotPenerbanganDb.findAllByTanggalPenugasanGreaterThan(sebulanLalu);
         Set<PilotModel> listPilotBulanIni = new HashSet<PilotModel>();
         for (PilotPenerbanganModel pilpen: listPilpen){
             listPilotBulanIni.add(pilpen.getPilot());
