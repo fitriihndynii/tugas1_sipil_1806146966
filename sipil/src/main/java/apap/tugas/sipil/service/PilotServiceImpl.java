@@ -86,8 +86,6 @@ public class PilotServiceImpl implements PilotService{
 
     @Override
     public void deletePilot(PilotModel pilot){
-        System.out.println("pilottt " + pilot);
-        pilotPenerbanganService.deletePilotPenerbangan(pilot);
         pilotDb.delete(pilot);
     }
 

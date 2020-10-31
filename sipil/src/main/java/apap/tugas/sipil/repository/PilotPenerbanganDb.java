@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface PilotPenerbanganDb extends JpaRepository<PilotPenerbanganModel, Long> {
     List<PilotPenerbanganModel> findAllByPenerbangan(PenerbanganModel penerbanganModel);
     List<PilotPenerbanganModel> findAllByPilot(PilotModel pilot);
-    List<PilotPenerbanganModel> findByTanggalPenugasanGreaterThanAndTanggalPenugasanLessThan(LocalDate start,LocalDate end);
+    List<PilotPenerbanganModel> findAll();
+//    List<PilotPenerbanganModel> findDistinctByTanggalPenugasanContaining(Month month);
 }

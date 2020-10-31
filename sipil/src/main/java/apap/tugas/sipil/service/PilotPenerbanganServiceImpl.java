@@ -48,12 +48,9 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
 
     @Override
     public Set<PilotModel> pilotBulanIni(){
-        LocalDate start = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1);
-        LocalDate end = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).plusMonths(1).withDayOfMonth(1).minusDays(1);
-        List<PilotPenerbanganModel> pilpenBulanIni = pilotPenerbanganDb.findByTanggalPenugasanGreaterThanAndTanggalPenugasanLessThan(start, end);
-        System.out.println("pilpen " + pilpenBulanIni);
+        List<PilotPenerbanganModel> listPilpen = pilotPenerbanganDb.findAll();
         Set<PilotModel> listPilotBulanIni = new HashSet<PilotModel>();
-        for (PilotPenerbanganModel pilpen: pilpenBulanIni){
+        for (PilotPenerbanganModel pilpen: listPilpen){
             listPilotBulanIni.add(pilpen.getPilot());
         }
         return listPilotBulanIni;

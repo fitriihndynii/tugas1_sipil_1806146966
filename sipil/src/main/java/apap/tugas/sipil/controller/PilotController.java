@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PilotController {
@@ -96,10 +97,14 @@ public class PilotController {
             Model model
     ){
         PilotModel pilot = pilotService.getPilotByIdPilot(idPilot);
-        pilot.getListPilotPenerbangan().clear();
-        pilotService.deletePilot(pilot);
+        Set<PilotPenerbanganModel> listPilotPenerbangan = pilot.getListPilotPenerbangan();
         model.addAttribute("pilot", pilot);
-        return "delete-pilot";
+        if(listPilotPenerbangan.size() == 0){
+            pilotService.deletePilot(pilot);
+            return "delete-pilot";
+        }else{
+            return "error-delete-pilot";
+        }
     }
 
     @GetMapping("/cari/pilot")
@@ -141,12 +146,7 @@ public class PilotController {
         model.addAttribute("maskapaiList", maskapaiList);
         if (kodeMaskapai != null){
             LinkedHashMap<PilotModel, Integer> pilpen = pilotService.pilotPenerbanganTerbanyak(kodeMaskapai);
-//            List<Integer> tugas = new LinkedList<>();
-//            for(PilotModel pilot: pilpen){
-//                tugas.add(pilot.getListPilotPenerbangan().size());
-//            }
             model.addAttribute("pilpen",pilpen);
-//            model.addAttribute("tugas", tugas);
         }
         return "cari-pilpen-terbanyak";
     }
